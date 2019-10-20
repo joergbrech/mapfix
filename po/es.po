@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-18 13:00+0200\n"
+"POT-Creation-Date: 2019-10-20 14:34+0200\n"
 "PO-Revision-Date: 2015-07-18 13:00+0200\n"
 "Last-Translator: Jan Kleinert <jan@kleinert-bonn.de>\n"
 "Language-Team: English <jan@kleinert-bonn.de>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: foobar/helloworld.kv:47
+#: mapfix/mapfix.kv:52
 msgid ""
 "'Mapfix'\n"
 "\n"
@@ -26,11 +26,11 @@ msgstr ""
 "\n"
 "Use photographed maps with your phone's GPS device"
 
-#: foobar/helloworld.kv:51
+#: mapfix/mapfix.kv:60
 msgid "This app uses Kivy, a Python Framework for NUI Development."
 msgstr "Esta application usa Kivy, un framework Python para NUI Development."
 
-#: foobar/helloworld.kv:59
+#: mapfix/mapfix.kv:74
 msgid ""
 "It was generated with the Python command-line utility\n"
 "Cookiecutter along with Cookiedozer."
@@ -38,7 +38,7 @@ msgstr ""
 "Fue generado usando el commando Python\n"
 "Cookiecutter junto con Cookiedozer."
 
-#: foobar/helloworld.kv:68
+#: mapfix/mapfix.kv:86
 msgid ""
 "Distributed under the terms of the MIT license,\n"
 "'Mapfix' is free and open source software."
@@ -46,6 +46,6 @@ msgstr ""
 "Distribuido bajo condiciones de uso y licencia MIT,\n"
 "'Mapfix' es un programa libre y gratuito."
 
-#: foobar/helloworld.kv:72
+#: mapfix/mapfix.kv:94
 msgid "Fork me on GitHub"
 msgstr "Fork me on GitHub"
