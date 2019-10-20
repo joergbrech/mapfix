@@ -7,11 +7,11 @@ def test_switch_language(app):
     english_text = (
         "This app uses Kivy, a Python Framework for NUI Development."
     )
-    assert test_label.text == english_text
+    assert(test_label.text == english_text)
 
     app.on_config_change(app.config, 'user_settings', 'language', 'de')
 
     german_text = (
         "Diese App benutzt Kivy, ein Python Framework zur NUI Entwicklung."
     )
-    assert test_label.text == german_text
+    assert(test_label.text == german_text)
