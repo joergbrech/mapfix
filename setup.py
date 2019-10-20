@@ -32,7 +32,7 @@ setup(
     version='0.1.0',
     author='Jan Kleinert',
     author_email='jan@kleinert-bonn.de',
-    description='Use photographed maps with your phone's GPS device',
+    description='Use photographed maps with your phone\'s GPS device',
     long_description=read('README.rst'),
     license='MIT',
     keywords=(
