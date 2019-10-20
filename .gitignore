@@ -5,3 +5,5 @@ build
 dist
 docs/build
 .eggs
+mapfix/mapfix.ini
+*.kate-swp

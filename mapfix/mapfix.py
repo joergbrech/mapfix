@@ -120,9 +120,9 @@ class MapfixApp(App):
           (:class:`kivy.uix.anchorlayout.AnchorLayout`): Root widget specified
             in the kv file of the app
         """
-        self.language = self.config.get('user_settings', 'language')
+        self.language = self.config.get('settings', 'language')
 
-        user_interval = self.config.get('user_settings', 'timer_interval')
+        user_interval = self.config.get('settings', 'timer_interval')
         self.timer_interval = TIMER_OPTIONS[user_interval]
 
         self.carousel = self.root.ids.carousel
@@ -139,7 +139,7 @@ class MapfixApp(App):
         `self.config`.
         """
         config.setdefaults(
-            'user_settings', {
+            'settings', {
                 'timer_interval': '1/60 sec',
                 'language': 'en'
             }
@@ -147,7 +147,7 @@ class MapfixApp(App):
 
     def build_settings(self, settings):
         """Read the user settings and create a panel from it."""
-        settings_file =  join(dirname(__file__), 'user_settings.json')
+        settings_file =  join(dirname(__file__), 'settings.json')
         settings.add_json_panel(self.title, self.config, settings_file)
 
     def on_config_change(self, config, section, key, value):
@@ -157,9 +157,9 @@ class MapfixApp(App):
         """
         if config is self.config:
             token = (section, key)
-            if token == ('user_settings', 'timer_interval'):
+            if token == ('settings', 'timer_interval'):
                 self.timer_interval=TIMER_OPTIONS[value]
-            elif token == ('user_settings', 'language'):
+            elif token == ('settings', 'language'):
                 self.language = value
 
     def on_pause(self):
