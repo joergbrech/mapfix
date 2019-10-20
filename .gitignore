@@ -1,3 +1,7 @@
 mapfix.egg-info
 __pycache__
 messages.pot
+build
+dist
+docs/build
+.eggs
