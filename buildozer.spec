@@ -1,89 +1,115 @@
 [app]
 
 # (str) Title of your application
-title = Mapfix
+title = MapFix
 
 # (str) Package name
-package.name = mapfix
+package.name = MapFix
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = jan.kleinert
 
 # (str) Source code where the main.py live
-source.dir = mapfix
+source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,json
+
+# (list) List of inclusions using pattern matching
+#source.include_patterns = assets/*,images/*.png
 
 # (list) Source files to exclude (let empty to not exclude anything)
-#source.exclude_exts = spec
+source.exclude_exts = spec,sh
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin
+source.exclude_dirs = tests, bin
+#source.exclude_dirs = tests, bin, maps
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
+# version = 0.1.1
+
+# (str) Application versioning (method 2)
 version.regex = __version__ = ['"](.*)['"]
 version.filename = %(source.dir)s/__init__.py
 
-# (str) Application versioning (method 2)
-# version = 1.2.0
-
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy
+requirements = piexif,pil,unidecode,exifread,numpy,pyproj,git+https://github.com/kivy/plyer.git,kivy,android
+
+# (str) Custom source folders for requirements
+# Sets custom source for any requirements with recipes
+# requirements.source.kivy = ../../kivy
 
 # (list) Garden requirements
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/images/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = %(source.dir)s/images/logo_mapfix.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = landscape
+orientation = portrait
 
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+# (list) List of service to declare
+#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
 
+#
+# OSX Specific
+#
+
+#
+# author = © Copyright Info
 
 #
 # Android specific
 #
 
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 1
+
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, CAMERA
 
 # (int) Android API to use
-#android.api = 14
+android.api = 19
 
-# (int) Minimum API required (8 = Android 2.2 devices)
-#android.minapi = 8
+# (int) Minimum API required
+android.minapi = 13
 
 # (int) Android SDK version to use
-#android.sdk = 21
+# android.sdk = 20
+# android.sdk = 24
 
 # (str) Android NDK version to use
-#android.ndk = 9c
+# android.ndk = 10.3.2
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+# android.ndk_path = /home/jan/tools/crystax/crystax-ndk-10.3.2/
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #android.p4a_dir =
 
 # (list) python-for-android whitelist
 #android.p4a_whitelist =
+
+# (bool) If True, then skip trying to update the Android sdk
+# This can be useful to avoid excess Internet downloads or save time
+# when an update is due and you just want to test/build your package
+# android.skip_update = False
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
@@ -129,9 +155,22 @@ fullscreen = 1
 # project.properties automatically.)
 #android.library_references =
 
+# (str) Android logcat filters to use
+android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+#android.copy_libs = 1
+
+# Set the backend to pygame (rather than sdl2)
+#p4a.bootstrap = pygame
+#p4a.source_dir= ~/data/tools/python-for-android
+
 #
 # iOS specific
 #
+
+# (str) Path to a custom kivy-ios folder
+#ios.kivy_ios_dir = ../kivy-ios
 
 # (str) Name of the certificate to use for signing the debug version
 # Get a list of available identities: buildozer ios list_identities
@@ -144,46 +183,51 @@ fullscreen = 1
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 1
+log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
 
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
 
-# -----------------------------------------------------------------------------
-# List as sections
+# (str) Path to build output (i.e. .apk, .ipa) storage
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
 #
-# You can define all the "list" as [section:key].
-# Each line will be considered as a option to the list.
-# Let's take [app] / source.exclude_patterns.
-# Instead of doing:
+#    You can define all the "list" as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
 #
-#     [app]
-#     source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#[app]
+#source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
 #
-# This can be translated into:
+#    This can be translated into:
 #
-#     [app:source.exclude_patterns]
-#     license
-#     data/audio/*.wav
-#     data/images/original/*
+#[app:source.exclude_patterns]
+#license
+#data/audio/*.wav
+#data/images/original/*
 #
 
 
-# -----------------------------------------------------------------------------
-# Profiles
+#    -----------------------------------------------------------------------------
+#    Profiles
 #
-# You can extend section / key with a profile
-# For example, you want to deploy a demo version of your application without
-# HD content. You could first change the title to add "(demo)" in the name
-# and extend the excluded directories to remove the HD content.
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add "(demo)" in the name
+#    and extend the excluded directories to remove the HD content.
 #
-#     [app@demo]
-#     title = My Application (demo)
+#[app@demo]
+#title = My Application (demo)
 #
-#     [app:source.exclude_patterns@demo]
-#     images/hd/*
+#[app:source.exclude_patterns@demo]
+#images/hd/*
 #
-# Then, invoke the command line with the "demo" profile:
+#    Then, invoke the command line with the "demo" profile:
 #
-#     buildozer --profile demo android debug
+#buildozer --profile demo android debug

@@ -1,3 +1,4 @@
 include LICENSE README.rst
-include */user_settings.json */*.kv
-recursive-include data **/*.mo
+include */projections.json */*.kv
+recursive-include data **/*.png
+recursive-include data **/*.json

@@ -50,7 +50,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'mapfix=mapfix.cli:main'
+            'mapfix=mapfix.main:main'
         ]
     },
     tests_require=['pytest'],

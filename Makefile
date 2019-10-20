@@ -1,4 +1,4 @@
-.PHONY: docs po mo
+.PHONY: docs
 
 help:
 	@echo "test - run the test py.test suite"
@@ -6,14 +6,13 @@ help:
 	@echo "docs - generate Sphinx HTML documentation and open it"
 	@echo "apk - build an android apk with buildozer"
 	@echo "deploy - deploy the app to your android device"
-	@echo "po - create i18n message file"
-	@echo "mo - create i18n locales files"
 
 test:
 	python setup.py test
 
 coverage:
-	python setup.py test -a '--cov=mapfix --cov-report=html'
+	#python setup.py test -a '--cov=mapfix --cov-report=html --cov-report=term'
+	pytest --cov=mapfix --cov-report=html --cov-report=term
 	xdg-open htmlcov/index.html
 
 docs:
@@ -25,20 +24,3 @@ apk:
 
 deploy:
 	buildozer android deploy logcat
-
-po:
-	xgettext -Lpython --keyword=tr:1 --output=messages.pot mapfix/*.kv
-	msgmerge --update --no-fuzzy-matching --backup=off po/en.po messages.pot
-	msgmerge --update --no-fuzzy-matching --backup=off po/de.po messages.pot
-	msgmerge --update --no-fuzzy-matching --backup=off po/es.po messages.pot
-	msgmerge --update --no-fuzzy-matching --backup=off po/fr.po messages.pot
-
-mo:
-	mkdir -p data/locales/en/LC_MESSAGES
-	mkdir -p data/locales/de/LC_MESSAGES
-	mkdir -p data/locales/es/LC_MESSAGES
-	mkdir -p data/locales/fr/LC_MESSAGES
-	msgfmt -c -o data/locales/en/LC_MESSAGES/mapfix.mo po/en.po
-	msgfmt -c -o data/locales/de/LC_MESSAGES/mapfix.mo po/de.po
-	msgfmt -c -o data/locales/es/LC_MESSAGES/mapfix.mo po/es.po
-	msgfmt -c -o data/locales/fr/LC_MESSAGES/mapfix.mo po/fr.po

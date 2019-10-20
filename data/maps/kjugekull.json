@@ -1,0 +1,1 @@
+{"info": {"is_locked": false, "version": "0.2.4", "name": "Kjugekull", "imagedata": "maps/imagedata/kjugekull.jpg", "time": "March 03, 2017 20:00"}, "projection": {"projkey": "UTM-MC", "description": "UTM", "projparams": {"zone": 1, "ellps": "WGS84", "datum": "WGS84", "no_defs": true, "proj": "utm", "units": "m", "south": false}}}

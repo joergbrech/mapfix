@@ -7,3 +7,6 @@ docs/build
 .eggs
 mapfix/mapfix.ini
 *.kate-swp
+.coverage
+htmlcov
+.buildozer

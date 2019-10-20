@@ -1,102 +1,728 @@
-#:kivy 1.8.0
-#:import randint random.randint
-#:import to_rgba kivy.utils.get_color_from_hex
-#:import _ mapfix.mapfix._
+#:kivy 1.9.2
 
-#:set link_clr '222222'
-#:set kivy_github 'https://github.com/kivy/kivy'
-#:set cookiecutter_github 'https://github.com/audreyr/cookiecutter'
-#:set cookiedozer_github 'https://github.com/hackebrot/cookiedozer'
-#:set repo_github 'https://github.com/joergbrech/mapfix'
 
-#:set fsize 15
+<MainScreen>:
+    maps_layout: ml
+    page_layout: pl
+    maps_button: mb
+    
+    PageLayout:
+        id: pl
+        border: dp(0)
+        swipe_threshold: 0.25
+        size_y: self.parent.height
+        canvas.after:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: (self.width,0)
+                size: self.size
+        
+        MapsLayout:
+            id: ml
+            #canvas:
+            #    Color:
+            #        rgb: 1, 1, 1
+                    
+        MapInfo:
+            id: map_info
 
-<Slide@BoxLayout>:
-    bg_hex_clr: '000000'
-    orientation: 'vertical'
+    
+    GridLayout:
+        id: menu_bar
+        cols: 4
+        pos_hint: {'top':1}
+        size_hint_y: 0.09
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 0.6
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        ButtonIcon:
+            id: sb
+            size_hint_x: 1./6
+            size_hint_y: 1
+            source: 'data/images/icon_menu.png'
+            on_press:
+                app.switch_screen(current='settings',direction='right',previous='main')
+                
+        LonLatLabel:
+            id: info_bar
+            size_hint_x: 0.5
+            size_hint_y: 1
+            font_size: 0.25*self.height
+            
+        BoxLayout:
+            id: sat_layout
+            size_hint_x: 1./6
+            size_hint_y: 1
+            orientation: 'vertical'
+            
+            Image:
+                id: satellite_icon
+                size_hint_y: 2./3
+                source: 'data/images/icon_gps.png'
+            
+            Label:
+                size_hint_y: 1./3
+                text: app.accuracy_string
+                font_size: 0.5*self.height
+                
+                
+        ButtonIcon:
+            id: mb
+            size_hint_x: 1./6
+            size_hint_y: 1
+            source: 'data/images/icon_maps2.png'
+            on_press:
+                app.switch_screen(current='maps',direction='left',previous='main')
+                
+    GridLayout:
+        id: menu_bar_bottom
+        cols: 6
+        pos_hint: {'bottom':0}
+        size_hint_y: 0.09
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, .6
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+        ButtonIcon:
+            id: pin_button2
+            
+        ButtonIcon:
+            id: pin_button3
+            
+        ButtonIcon:
+            id: pin_button4
+        
+        ButtonIcon:
+            id: pin_button5
+            
+        ButtonIcon:
+            id: pin_button
+            source: 'data/images/pin_blue2_transparent.png'
+            #opacity: 0.5
+            image_scale: 0.8
+            on_press: 
+                root.invisible_button()
+                
+        ButtonIcon:
+            id: btn_info
+            opacity: 0.25
+            source: 'data/images/icon_gear_gray.png'
+            image_scale: 0.8
+            on_press:
+                root.info_button()
+                
+
+<MapInfo>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None,None
+        size: root.parent.width-2*root.parent.border,0.82*root.parent.height
+        pos: root.parent.border,0.09*self.parent.height
+        canvas.before:
+            Color:
+                rgba: (0., 0., 0., .6)
+            Rectangle:
+                pos: self.pos
+                size:self.size
+                
+        # Header with map title, date, num. markers and buttons
+        StackLayout:
+            size_hint:1,0.2
+
+        
+            ButtonIcon:
+                size_hint: 1./4,0.5
+                #height: cm(0.8)
+                id: button_back
+                source: 'data/images/icon_right.png'
+                image_scale: 0.8
+                on_press: root.back_button()
+                canvas.before:
+                    Color:
+                        rgba: (0., 0.7, 1, .6)
+                    Rectangle:
+                        pos: self.pos 
+                        size: self.size
+                    
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 3./4, 0.5
+                #height: cm(0.8)
+                canvas.before:
+                    Color:
+                        rgba: (0., 0.7, 1, .6)
+                    Rectangle:
+                        pos: self.pos 
+                        size: self.size
+                
+                Label:
+                    id: namelabel
+                    text: ''
+                    size_hint: 1, 1./2
+                    text_size: self.size
+                    shorten: True
+                    shorten_from: 'right'
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+
+                Label:
+                    id: datelabel
+                    size_hint: 1,1./4
+                    text: ''
+                    text_size: self.size
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    id: projectionlabel
+                    size_hint: 1,1./4
+                    text: ''
+                    text_size: self.size
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'               
+
+            
+            GridLayout:
+                cols: 4
+                size_hint: 1,0.5
+                #height: cm(0.8)
+                        
+                ButtonIconText:
+                    size_hint_x: 1./4
+                    id: button_calibrate
+                    source: 'data/images/icon_calibrate.png'
+                    labeltext: 'Recalibrate'
+                    image_scale: 0.8
+                    on_press: root.calibrate_button()
+                        
+                ButtonIconText:
+                    size_hint_x: 1./4
+                    id: button_edit
+                    source: 'data/images/icon_edit.png'
+                    labeltext: 'Rename'
+                    image_scale: 0.8
+                    on_press: root.rename_button()
+                    
+                ButtonIconText:
+                    size_hint_x: 1./4
+                    id: button_lock
+                    source: 'data/images/icon_lock.png'
+                    labeltext: 'Lock'
+                    image_scale: 0.8
+                    on_press: root.lock_button()
+                    
+                ButtonIconText:
+                    size_hint_x: 1./4
+                    id: button_trash
+                    source: 'data/images/icon_trash.png'
+                    labeltext: 'Delete'
+                    image_scale: 0.8
+                    on_press: root.trash_button()
+
+        ScrollView:
+            size_hint: 1,0.75
+    
+            StackLayout:
+                size_hint:1,None
+                pos_hint: {'top':1}
+                height: cm(1.6)
+    
+            
+                Label:
+                    size_hint:1,None
+                    height: cm(0.5)
+                    text: 'Calibration Info'
+                    font_size: 0.5*self.height
+                    canvas.before:
+                        Color:
+                            rgba: (0., 0., 0., 0.75)
+                        Rectangle:
+                            pos: self.pos 
+                            size: self.size
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'time:'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: caldatelabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'Markers:'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: nmarkerlabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'transform:'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: transformlabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'residual (pre):'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: resprelabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'residual (post):'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: reslabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                    
+                Label:
+                    size_hint:1./3,None
+                    height: cm(0.25)
+                    text: 'iterations:'
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+                Label:
+                    id: iterlabel
+                    size_hint:2./3,None
+                    height: cm(0.25)
+                    text: ''
+                    text_size: (self.width*0.8,self.height)
+                    font_size: 0.67*self.height
+                    valign: 'middle'
+                    halign: 'left'
+                
+        # blue info label at the bottom
+        Label:
+            id: infolabel
+            size_hint:1,0.05
+            #height: cm(0.33)
+            text: ''
+            font_size: 0.5*self.height
+            canvas.before:
+                Color:
+                    rgba: (0., 0.7, 1, .6)
+                Rectangle:
+                    pos: self.pos 
+                    size: self.size
+                
+
+                
+<MapsMenu>:
+    mapsList: rvid
+    
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            cols: 4
+            pos_hint: {'top':1}
+            size_hint_y: 0.09
+            ButtonIcon:
+                size_hint_x: 1./6
+                source: 'data/images/icon_left.png'
+                image_scale: 0.5
+                on_press:
+                    app.switch_screen(current='main',direction='right',previous='maps')
+
+            Label:
+                size_hint_x: 0.5
+                text: "Maps"
+                font_size: 0.5*self.height
+                #bold: True
+            ButtonIcon:
+                size_hint_x: 1./6
+                source: 'data/images/icon_folder.png'
+            ButtonIcon:
+                size_hint_x: 1./6
+                source: 'data/images/icon_camera.png'
+                on_press: root.do_capture()
+        RV:
+            id: rvid
+
+<SettingsMenu>:
+    GridLayout:
+        cols: 2
+        pos_hint: {'top':1}
+        size_hint_y: 0.09
+        Label:
+            size_hint_x: 5./6
+            text: "Menu"
+            font_size: 0.5*self.height
+            #bold: True
+        ButtonIcon:
+            size_hint_x: 1./6
+            source: 'data/images/icon_right.png'
+            image_scale: 0.5
+            on_press:
+                app.switch_screen(current='main',direction='left',previous='settings')
+        
+    Label:
+        size_hint_y: 0.05
+        pos_hint: {'bottom':0}
+        text: 'Version {}'.format(app.__version__)
+                    
+        
+                
+<SelectableLabel>:
+    # Draw a background to indicate selection
     canvas.before:
         Color:
-            rgba: to_rgba(root.bg_hex_clr)
+            rgba: (0., 0.7, 1, .6) if self.selected else (0, 0, 0, 1)
         Rectangle:
             pos: self.pos
             size: self.size
+    text_size: self.size
+    valign: 'middle'
+    padding_x: dp(56)
+            
+<RV>:
+    viewclass: 'SelectableLabel'
+    SelectableRecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        multiselect: False
+        touch_multiselect: False
 
+                
+<ButtonIcon@Button>:
+    source: 'data/images/icon_none.png'
+    background_color: (1,0,0,0)
+    image_scale: 1.
+    Image:
+        source: root.source
+        x: self.parent.center_x - self.width/2
+        y: self.parent.center_y - self.height/2
+        size: self.parent.image_scale*self.parent.width,self.parent.image_scale*self.parent.height
 
-<I18NLabel>:
-    source_text: ''
-    halign: 'center'
-    font_size: fsize
-    text: app.translation(self.source_text)
+<ButtonIconText@Button>:
+    labeltext: 'button'
+    source: 'data/images/icon_none.png'
+    background_color: (1,0,0,0)
+    image_scale: 1.
+    Image:
+        source: root.source
+        x: self.parent.center_x - self.width/2
+        y: self.parent.y + self.height*2/3
+        #height: self.parent.image_scale*self.parent.height*2/3
+        #width: self.parent.height / self.image_ratio
+        size: self.parent.image_scale*self.parent.width*2/3,self.parent.image_scale*self.parent.height*2/3
+        #size_hint_max_y: self.parent.image_scale*self.parent.height*2/3
+        #height: min(self.height,self.parent.image_scale*self.parent.height*2/3)
+        
+    Label:
+        x: self.parent.center_x - self.width/2
+        y: self.parent.y
+        size: self.parent.width*1/3,self.parent.height*1/3
+        text: root.labeltext
+        font_size: 0.5*self.height
+            
+<NewMapPopup>:
+    size_hint: .8, .3
+    pos_hint:{'top': 0.8}
+    title: "Add a new map"
+    auto_dismiss: False
+    
+    BoxLayout:
+        orientation: 'vertical'
+        #padding: 10
+        #spacing: 20
+        BoxLayout:
+            orientation: 'horizontal'
+            #padding: 10
+            spacing: 20
+            size_hint_y: 0.5
+            Label:
+                text: root.labelText
+                size_hint: 0.33, 0.5
+            TextInput:
+                id: map_name_input
+                hint_text: 'My Map'
+                #pos_hint: {'x': 0.25, 'y': .6}
+                size_hint: 2./3, 0.5
+                font_size: 0.66*self.height
+                multiline: False
+                on_text_validate: root.save()
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 10
+            spacing: 20
+            size_hint_y: 0.5
+            
+            Button:
+                text: 'Cancel'
+                on_press: root.cancel()
+            Button:
+                text: 'Save'
+                on_press: root.save()
+                
+<RenameMapPopup>:
+    size_hint: .8, .3
+    pos_hint:{'top': 0.8}
+    title: "Rename the map"
+    auto_dismiss: False
+    
+    BoxLayout:
+        orientation: 'vertical'
+        #padding: 10
+        #spacing: 20
+        BoxLayout:
+            orientation: 'horizontal'
+            #padding: 10
+            spacing: 20
+            size_hint_y: 0.5
+            Label:
+                text: 'Enter name'
+                size_hint: 0.33, 0.5
+            TextInput:
+                id: map_name_input
+                suggestion_text: 'My Map'
+                #pos_hint: {'x': 0.25, 'y': .6}
+                size_hint: 2./3, 0.5
+                font_size: 0.66*self.height
+                multiline: False
+                on_text_validate: root.rename()
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 10
+            spacing: 20
+            size_hint_y: 0.5
+            
+            Button:
+                text: 'Cancel'
+                on_press: root.dismiss()
+            Button:
+                text: 'Save'
+                on_press: root.rename()
 
+<MsgPopup>:
+    size_hint: .7, .4
+    title: "Attention"
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 20
 
-<RefLabel>:
-    halign: 'center'
-    font_size: fsize
-    markup: True
+        Label:
+            id: message_label
+            size_hint_y: 0.4
+            text_size: self.parent.width,self.height
+            text: "Label"
+        Button:
+            id: btn
+            text: 'Dismiss'
+            size_hint_y: 0.4
+            on_press: root.dismiss()
+            
+<ConfirmPopup>:
+    size_hint: .6, .2
+    title: "Are you sure?"
+    
+    BoxLayout:
+        orientation: 'horizontal'
+        padding: 10
+        spacing: 20
 
+        Button:
+            text: 'No'
+            size_hint_x: 0.4
+            on_press: root.dismiss()
+        Button:
+            id: yes_button
+            text: 'Yes'
+            size_hint_x: 0.4
+            
+<Map>:
+    #on_size: self.center = self.parent.right,self.parent.top
+    auto_bring_to_front: True
+    size_hint: None, None
+    size: image.size
 
-<TransitionProgress>:
-    size_hint: 0.8, 0.1
-    value: app.timer
+    #AsyncImage:
+    Image:
+        id: image
+        source: root.source
 
+        # create initial image to be 400 pixels width
+        size: 400, 400 / self.image_ratio
 
-AnchorLayout:
-    anchor_y: 'bottom'
-    Carousel:
-        id: carousel
-        loop: True
-        Slide:
-            name: 'hello'
-            bg_hex_clr: '154152'
-            I18NLabel:
-                source_text: _("'Mapfix'\n\nUse photographed maps with your phone's GPS device")
-        Slide:
-            name: 'kivy'
-            spacing: 10
-            bg_hex_clr: '057173'
-            I18NLabel:
-                text_size: self.size
-                valign: 'bottom'
-                source_text: _("This app uses Kivy, a Python Framework for NUI Development.")
-            RefLabel:
-                text_size: self.size
-                valign: 'top'
-                text:
-                    "[ref={kivy_github}][color={link_clr}]{kivy_github}[/color][/ref]" \
-                    "".format(**locals())
-        Slide:
-            name: 'cookiecutterdozer'
-            spacing: 10
-            bg_hex_clr: '487353'
-            I18NLabel:
-                valign: 'bottom'
-                text_size: self.size
-                source_text: _("It was generated with the Python command-line utility\nCookiecutter along with Cookiedozer.")
-            RefLabel:
-                valign: 'top'
-                text_size: self.size
-                text:
-                    "[ref={cookiecutter_github}][color={link_clr}]{cookiecutter_github}[/color][/ref]\n" \
-                    "[ref={cookiedozer_github}][color={link_clr}]{cookiedozer_github}[/color][/ref]\n" \
-                    "".format(**locals())
-        Slide:
-            name: 'license'
-            bg_hex_clr: 'C2872E'
-            I18NLabel:
-                source_text: _("Distributed under the terms of the MIT license,\n'Mapfix' is free and open source software.")
-        Slide:
-            name: 'github'
-            spacing: 10
-            bg_hex_clr: 'AB3E2B'
-            I18NLabel:
-                valign: 'bottom'
-                text_size: self.size
-                source_text: _("Fork me on GitHub")
-            RefLabel:
-                valign: 'top'
-                text_size: self.size
-                text:
-                    "[ref={repo_github}][color={link_clr}]{repo_github}[/color][/ref]" \
-                    "".format(**locals())
-    TransitionProgress:
-        id: progress_bar
+        # add shadow background
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            BorderImage:
+                source: 'shadow32.png'
+                border: (12,12,12,12)
+                size:(self.width+24, self.height+24)
+                pos: (-12,-12)
+            
+    FloatLayout:
+        id: projectionSpace
+        current_location: cl
+        
+        canvas.before:
+            # store current matrix
+            PushMatrix
+            MatrixInstruction:
+                # reverse Maps's transformation matrix
+                matrix: self.parent.transform_inv
+        
+        canvas.after:
+            # restore matrix so that other widgets draw normally
+            PopMatrix
+            
+        Location:
+            id: cl
+            pos: (0,0)
+            
+    MarkerLayout:
+        id: markerSpace
+            
+<MarkerLayout>:
+    canvas.before:
+        # store current matrix
+        PushMatrix
+        MatrixInstruction:
+            # reverse Maps's transformation matrix
+            matrix: self.parent.transform_inv
+            
+    canvas.after:
+        # restore matrix so that other widgets draw normally
+        PopMatrix
+            
+<Marker>:
+    size_hint: None, None
+    size: cm(0.8),cm(0.8)
+    Image:
+        id: pin
+        source: 'data/images/pin_blue2.png'
+        pos_hint: {'x':-0.5,'y': 0}
+        #pos_hint: {'x':-125./290.,'y': 0}
+        
+<MarkerBubble>:
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+    size_hint: 4,2.5
+    pos_hint: {'x':-0.5*self.size_hint_x,'y': 0.25}
+    #arrow_pos: 'bottom_left'
+    
+    BoxLayout:
+        orientation: 'vertical'
+    
+        GridLayout:
+            cols: 2
+            size_hint_y: 0.5
+            canvas:
+                Color:
+                    rgba: 0, 0, 0, 0.5
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    
+            ButtonIconText:
+                id: button_trash
+                source: 'data/images/icon_trash.png'
+                labeltext: 'Delete'
+                image_scale: 0.8
+                on_press: root.trash_button()
+                
+            ButtonIconText:
+                id: button_deactivate
+                source: 'data/images/icon_powerButton.png'
+                labeltext: 'Deactivate'
+                image_scale: 0.8
+                on_press: root.active_button()
+        
+        
+        LonLatLabel:
+            size_hint_y: 0.5
+            id: lolala
+            font_size: 0.25*self.height
+    
+
+<Location>:
+    size_hint: None, None
+    size: cm(0.5),cm(0.5)
+    Image:
+        id: crosshair
+        source: 'data/images/icon_crosshair4.png'
+        #size: 600, 600 / self.image_ratio 
+        pos_hint: {'x':-0.5,'y': -0.5}
