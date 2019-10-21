@@ -4,7 +4,9 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
-  
+os:
+  - linux
+  - osx
 compiler:
   - gcc
   
@@ -14,8 +16,21 @@ before_install:
 install:
   - pip install -r requirements.txt
   - pip install -e .
-
   
-script:
-  - make test
-  
+jobs:
+  include:
+    - stage: test
+      script: make test
+    - stage: coverage
+      os: linux
+      script: make coverage
+      #TODO: connect to codecov.io
+    - stage: doc
+      os: linux
+      script: make docs
+      #TODO: publish to github pages and readthedocs.io
+    - stage: deploy
+      os: linux
+      script: make deploy
+      #TODO: Upload to Github Releases and maybe even Play Store
+      
