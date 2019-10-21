@@ -31,7 +31,7 @@ setup(
         'unidecode',
         'exifread',
         'numpy',
-        'pyproj',
+        'pyproj==1.9.6',
         'plyer'
     ],
     zip_safe=False,
