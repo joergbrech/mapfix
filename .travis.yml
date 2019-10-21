@@ -14,24 +14,26 @@ stages:
 - name: deploy
   if: tag IS present
 
-before_install:
-  - sudo apt-get install libgl1-mesa-dev
-
-script:
-  - pip install -e .
-
 jobs:
   include:
     - stage: test
       script: 
+        - sudo apt-get install libgl1-mesa-dev
+        - pip install -e .
         - make test
         - make apk
     - stage: coverage
       python: "3.6"
       install: pip install coverage codecov
-      script: make coverage
+      script: 
+        - sudo apt-get install libgl1-mesa-dev
+        - pip install -e .
+        - make coverage
       after_success: codecov
     - stage: deploy
       python: "3.6"
-      script: make deploy
+      script: 
+        - sudo apt-get install libgl1-mesa-dev
+        - pip install -e .
+        - make deploy
       #TODO: Upload to Github Releases and maybe even Play Store
