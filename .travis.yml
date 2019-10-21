@@ -21,6 +21,8 @@ jobs:
         - sudo apt-get install libgl1-mesa-dev
         - pip install -e .
         - make test
+        - pip install cython
+        - pip install buildozer
         - make apk
     - stage: coverage
       python: "3.6"
@@ -35,5 +37,7 @@ jobs:
       script: 
         - sudo apt-get install libgl1-mesa-dev
         - pip install -e .
+        - pip install cython==0.23
+        - pip install buildozer
         - make deploy
       #TODO: Upload to Github Releases and maybe even Play Store
