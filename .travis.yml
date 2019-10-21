@@ -7,6 +7,9 @@ python:
   
 compiler:
   - gcc
+  
+before_install:
+  - sudo apt-get install libgl1-mesa-dev
 
 install:
   - pip install -r requirements.txt
