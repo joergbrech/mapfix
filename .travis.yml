@@ -14,20 +14,26 @@ stages:
 - name: deploy
   if: tag IS present
   
-script:
+install:
   - sudo apt-get install libgl1-mesa-dev
   - sudo apt install openjdk-8-jdk
-  - pip install -e .
-  - make test
+  - pip install -r requirements.txt
   - pip install cython
   - pip install buildozer
+  - pip install -e .
+  
+script:
+  - make test
   - make apk
 
 jobs:
   include:
     - stage: coverage
       python: "3.6"
-      install: pip install coverage codecov
+      install: 
+        - pip install -r requirements.txt
+        - pip install coverage codecov
+        - pip install -e .
       script: 
         - make coverage
       after_success: codecov
