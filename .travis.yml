@@ -6,7 +6,7 @@ python:
   - "3.7"
 os:
   - linux
-#  - osx  ## uncomment if one day Travis support python on Mac
+#  - osx  # uncomment if one day Travis supports python on Mac
 compiler:
   - gcc
   
@@ -26,18 +26,20 @@ script: skip
 jobs:
   include:
     - stage: test
-      script: make test
+      script: 
+        - make test
+        - make apk
     - stage: coverage
       os: linux
       python: "3.6"
-      install: pip install pytest-cov coverage codecov
+      install: pip install coverage codecov
       script: make coverage
       after_success: codecov
     - stage: doc
       os: linux
       python: "3.6"
       script: make docs
-      #TODO: publish to github pages and readthedocs.io
+      #TODO: publish to (github pages and) readthedocs.io
     - stage: deploy
       os: linux
       script: make deploy
