@@ -29,8 +29,9 @@ jobs:
     - stage: coverage
       python: "3.6"
       install: pip install coverage codecov
-      script:make coverage
+      script: make coverage
       after_success: codecov
     - stage: deploy
+      python: "3.6"
       script: make deploy
       #TODO: Upload to Github Releases and maybe even Play Store
