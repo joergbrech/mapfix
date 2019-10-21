@@ -4,6 +4,9 @@
 Mapfix
 ==========================
 
+.. image:: https://readthedocs.org/projects/mapfix/badge/?version=latest
+:target: https://mapfix.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 .. image:: https://travis-ci.com/joergbrech/mapfix.svg?token=3j1KXvuZPDDLeees2fes&branch=master
     :target: https://travis-ci.com/joergbrech/mapfix
 .. image:: https://codecov.io/gh/joergbrech/mapfix/branch/master/graph/badge.svg
