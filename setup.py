@@ -44,6 +44,13 @@ setup(
     install_requires=[
         'kivy>=1.8.0',
         'click',
+        'piexif',
+        'pillow',
+        'unidecode',
+        'exifread',
+        'numpy',
+        'pyproj',
+        'plyer'
     ],
     zip_safe=False,
     packages=find_packages(),

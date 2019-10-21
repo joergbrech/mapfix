@@ -10,7 +10,7 @@ package.name = MapFix
 package.domain = jan.kleinert
 
 # (str) Source code where the main.py live
-source.dir = .
+source.dir = mapfix
 
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,json
@@ -37,7 +37,7 @@ version.filename = %(source.dir)s/__init__.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = piexif,pil,unidecode,exifread,numpy,pyproj,git+https://github.com/kivy/plyer.git,kivy,android
+requirements = piexif,pil,unidecode,exifread,numpy,pyproj,plyer,kivy,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -47,10 +47,10 @@ requirements = piexif,pil,unidecode,exifread,numpy,pyproj,git+https://github.com
 #garden_requirements =
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/images/presplash.png
+presplash.filename = %(source.dir)s/data/images/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/images/logo_mapfix.png
+icon.filename = %(source.dir)s/data/images/logo_mapfix.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait
@@ -76,10 +76,10 @@ fullscreen = 1
 android.permissions = INTERNET,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, CAMERA
 
 # (int) Android API to use
-android.api = 19
+#android.api = 19
 
 # (int) Minimum API required
-android.minapi = 13
+android.minapi = 26
 
 # (int) Android SDK version to use
 # android.sdk = 20
