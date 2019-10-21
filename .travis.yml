@@ -16,6 +16,7 @@ stages:
   
 script:
   - sudo apt-get install libgl1-mesa-dev
+  - sudo apt install openjdk-8-jdk
   - pip install -e .
   - make test
   - pip install cython
