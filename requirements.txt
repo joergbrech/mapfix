@@ -2,4 +2,5 @@ sphinx
 sphinx-rtd-theme
 pytest
 pytest-cov
+cython==0.23
 buildozer
