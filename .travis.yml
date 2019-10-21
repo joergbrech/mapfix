@@ -12,8 +12,6 @@ compiler:
   
 before_install:
   - sudo apt-get install libgl1-mesa-dev
-  - pip install -r requirements.txt
-  - pip install -e .
   
 jobs:
   include:
@@ -21,14 +19,16 @@ jobs:
       script: make test
     - stage: coverage
       os: linux
+      python: "3.6"
       script: make coverage
       #TODO: connect to codecov.io
     - stage: doc
       os: linux
+      python: "3.6"
+      if: branch = master AND type != pull_request
       script: make docs
       #TODO: publish to github pages and readthedocs.io
     - stage: deploy
       os: linux
       script: make deploy
       #TODO: Upload to Github Releases and maybe even Play Store
-      
