@@ -8,10 +8,9 @@ help:
 	@echo "deploy - deploy the app to your android device"
 
 test:
-	python setup.py test
+	pytest
 
 coverage:
-	#python setup.py test -a '--cov=mapfix --cov-report=html --cov-report=term'
 	pytest --cov=mapfix --cov-report=html --cov-report=term
 	xdg-open htmlcov/index.html
 

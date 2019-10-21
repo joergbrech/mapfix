@@ -10,3 +10,4 @@ mapfix/mapfix.ini
 .coverage
 htmlcov
 .buildozer
+*.pyc

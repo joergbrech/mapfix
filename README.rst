@@ -1,20 +1,20 @@
+.. image:: data/images/logo_mapfix.png
+  :align: center
+
 Mapfix
 ==========================
 
 Use photographed maps with your phone's GPS device
 
-----
-
-This `Kivy`_ app was generated with `Cookiecutter`_ along with `@hackebrot`_'s `Cookiedozer`_ template.
-
 
 Features
 --------
 
-* Minimal design with flat colors
-* Text labels that contain clickable links
-* Several slides that can be controlled via swipe gestures
-* Settings panel to change the slider transition delay (``<F1>``)
+* Corrects for orientation, scale and perspective
+* Many different map projects
+* Modify/Add/Delete calibration points
+* Recalibrate manually
+* Lock a calibrated map
 
 
 Requirements
@@ -106,6 +106,10 @@ Issues
 ------
 
 If you encounter any problems, please `file an issue`_ along with a detailed description.
+
+----
+
+This `Kivy`_ app was generated with `Cookiecutter`_ along with `@hackebrot`_'s `Cookiedozer`_ template.
 
 
 .. _`@hackebrot`: https://github.com/hackebrot
