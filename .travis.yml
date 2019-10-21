@@ -17,11 +17,12 @@ stages:
 - name: doc
 - name: deploy
   if: tag IS present
-script: skip
-  
+
 before_install:
   - sudo apt-get install libgl1-mesa-dev
-  
+  - pip install -e .
+script: skip
+
 jobs:
   include:
     - stage: test
