@@ -13,31 +13,25 @@ stages:
   if: branch = master AND type != pull_request
 - name: deploy
   if: tag IS present
+  
+script:
+  - sudo apt-get install libgl1-mesa-dev
+  - pip install -e .
+  - make test
+  - pip install cython
+  - pip install buildozer
+  - make apk
 
 jobs:
   include:
-    - stage: test
-      script: 
-        - sudo apt-get install libgl1-mesa-dev
-        - pip install -e .
-        - make test
-        - pip install cython
-        - pip install buildozer
-        - make apk
     - stage: coverage
       python: "3.6"
       install: pip install coverage codecov
       script: 
-        - sudo apt-get install libgl1-mesa-dev
-        - pip install -e .
         - make coverage
       after_success: codecov
     - stage: deploy
       python: "3.6"
       script: 
-        - sudo apt-get install libgl1-mesa-dev
-        - pip install -e .
-        - pip install cython==0.23
-        - pip install buildozer
         - make deploy
       #TODO: Upload to Github Releases and maybe even Play Store
