@@ -4,6 +4,9 @@
 Mapfix
 ==========================
 
+.. image:: https://travis-ci.com/joergbrech/mapfix.svg?token=3j1KXvuZPDDLeees2fes&branch=master
+    :target: https://travis-ci.com/joergbrech/mapfix
+
 Use photographed maps with your phone's GPS device
 
 

@@ -1,9 +1,8 @@
 import pytest
-from click.testing import CliRunner
 
 from mapfix.main import main
 
 
-def test_runner():
-    return CliRunner()
+def test_dummy():
+    assert(1==1)
 
