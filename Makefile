@@ -12,11 +12,11 @@ test:
 
 coverage:
 	pytest --cov=mapfix --cov-report=html --cov-report=term
-	xdg-open htmlcov/index.html
+	#xdg-open htmlcov/index.html
 
 docs:
 	$(MAKE) -C docs html
-	xdg-open docs/build/html/index.html
+	#xdg-open docs/build/html/index.html
 
 apk:
 	buildozer -v android debug
