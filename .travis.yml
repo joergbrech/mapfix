@@ -22,6 +22,9 @@ install:
   - pip install cython buildozer
   - pip install -e .
   
+before_script:
+  - java --version
+  
 script:
   - make test
   - make apk
