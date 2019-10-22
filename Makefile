@@ -19,7 +19,7 @@ docs:
 	#xdg-open docs/build/html/index.html
 
 apk:
-	buildozer -v android debug > log_apk.txt
+	buildozer android debug
 
 deploy:
-	buildozer android deploy logcat > log_deploy.txt
+	buildozer android deploy logcat
