@@ -1,3 +1,4 @@
+dist: trusty #because of https://travis-ci.community/t/oracle-jdk-11-and-10-are-pre-installed-not-the-openjdk-builds/785/16
 language: python
 python:
   - "3.4"
