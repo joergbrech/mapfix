@@ -165,6 +165,12 @@ android.logcat_filters = *:S python:D
 #p4a.bootstrap = pygame
 #p4a.source_dir= ~/data/tools/python-for-android
 
+# (bool) If True, then automatically accept SDK license
+# agreements. This is intended for automation only. If set to False,
+# the default, you will be shown the license when first running
+# buildozer.
+android.accept_sdk_license = True
+
 #
 # iOS specific
 #
