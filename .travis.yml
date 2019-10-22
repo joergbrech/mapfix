@@ -24,7 +24,7 @@ install:
   - pip install -e .
   
 before_script:
-  - java --version
+  - java -version
   
 script:
   - make test
