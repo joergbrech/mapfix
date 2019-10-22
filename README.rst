@@ -11,8 +11,13 @@ Mapfix
     :target: https://travis-ci.com/joergbrech/mapfix
 .. image:: https://codecov.io/gh/joergbrech/mapfix/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/joergbrech/mapfix
+.. image:: https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png
+    :target: href='https://play.google.com/store/apps/details?id=org.mapfix.mapfix&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1
+    :alt: Get it on Google Play
+    
+MapFix lets you take photographs of maps and place markers on the image, whenever you know where you are. These markers are used to callibrate the image, so your current location based on your mobile phone's GPS device is dispayed in the image.
 
-Use photographed maps with your phone's GPS device
+Add markers by double tap. A minimum of two markers is required. The more you add, the better the calibration will be.
 
 
 Features
