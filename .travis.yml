@@ -21,7 +21,7 @@ cache:
 before_install:
 # most of the following is taken from https://buildozer.readthedocs.io/en/latest/installation.html
   - sudo apt-get update
-  - sudo apt-get install libgl1-mesa-dev lld
+  - sudo apt-get install libgl1-mesa-dev
   - pip install --upgrade buildozer
   - sudo apt-get install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake
   - pip install --upgrade cython virtualenv
