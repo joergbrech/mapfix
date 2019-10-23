@@ -37,7 +37,7 @@ version.filename = %(source.dir)s/__init__.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = piexif,pillow,unidecode,exifread,numpy,pyproj,plyer,kivy,android
+requirements = python3,kivy,piexif,pillow,unidecode,exifread,numpy,pyproj,plyer
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes

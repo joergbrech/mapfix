@@ -14,11 +14,16 @@ stages:
 - name: deploy
   if: tag IS present
   
-install:
-  - sudo apt-get install libgl1-mesa-dev
-  - sudo apt install openjdk-8-jdk
-  - pip install -r requirements.txt
+cache:
+    directories:
+     - $HOME/.buildozer/
+     
+before_install:
+  - sudo apt-get install libgl1-mesa-dev openjdk-8-jdk
   - pip install cython buildozer
+  
+install:
+  - pip install -r requirements.txt
   - pip install -e .
   
 before_script:
@@ -30,7 +35,7 @@ before_script:
   
 script:
   - make test
-  - make apk
+  - travis_wait 60 make apk
 
 jobs:
   include:
