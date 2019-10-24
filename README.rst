@@ -16,13 +16,27 @@ MapFix lets you take photographs of maps and place markers on the image, wheneve
 
 Add markers by double tap. A minimum of two markers is required. The more you add, the better the calibration will be.
 
+.. list-table:: 
+
+    * - .. figure:: data/images/Screenshot_03.png
+
+           Live Location on photographed map
+
+      - .. figure:: data/images//Screenshot_02.png
+
+           Edit calibration marker
+
+      - .. figure:: data/images/Screenshot_06.png
+
+           Store several maps and import from camera
+
 
 Features
 --------
 
 * Corrects for orientation, scale and perspective
 * Many different map projects
-* Modify/Add/Delete calibration points
+* Modify/Add/Delete calibration markers
 * Recalibrate manually
 * Lock a calibrated map
 

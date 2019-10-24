@@ -11,3 +11,5 @@ mapfix/mapfix.ini
 htmlcov
 .buildozer
 *.pyc
+.vscode
+_build
