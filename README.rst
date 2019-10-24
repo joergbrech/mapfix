@@ -30,14 +30,15 @@ Features
 --------
 
 * Corrects for orientation, scale and perspective
-* Many different map projects
+* Many different map projectionss
 * Modify/Add/Delete calibration markers
 * Recalibrate manually
 * Lock a calibrated map
 
 Experimental 
 ------------
-MapFix is in experimantal state and is currently available in the Play Store for registered alpha testers. If you are interested in testing, send me your google username and I will add you to the list of alpha testers!
+MapFix is in experimantal state and is currently available in the Play Store for registered alpha testers. 
+If you are interested, send me your google username and I will add you to the list of alpha testers!
 
 Contributing
 ------------
