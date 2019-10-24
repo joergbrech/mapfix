@@ -3,10 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. image:: data/images/presplash_b.png
+     :align: center
+
 Welcome to Mapfix's documentation!
 ======================================================
 
-Use photographed maps with your phone's GPS device
+Use photographed maps with your phone's GPS device.
 
 Basics
 ------
