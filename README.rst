@@ -11,9 +11,6 @@ Mapfix
     :target: https://travis-ci.com/joergbrech/mapfix
 .. image:: https://codecov.io/gh/joergbrech/mapfix/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/joergbrech/mapfix
-.. image:: https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png
-    :target: href='https://play.google.com/store/apps/details?id=org.mapfix.mapfix&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1
-    :alt: Get it on Google Play
     
 MapFix lets you take photographs of maps and place markers on the image, whenever you know where you are. These markers are used to callibrate the image, so your current location based on your mobile phone's GPS device is dispayed in the image.
 
@@ -29,11 +26,19 @@ Features
 * Recalibrate manually
 * Lock a calibrated map
 
+Experimental 
+------------
+MapFix is in experimantal state and is currently available in the Play Store for registered alpha testers. If you are interested in testing, send me your google username and I will add you to the list of alpha testers!
+
+Contributing
+------------
+
+Contributions in the form of issues or PRs are more than welcome!
 
 Requirements
 ------------
 
-To run "Mapfix" you only need `Kivy`_.
+To run "Mapfix" on Windows, OSX or Linux, you only need `Kivy`_.
 
 Depending on the features that you want to use, you do require additional libs though.
 
@@ -84,13 +89,13 @@ Run the `pytest`_ test suite:
 
     $ make test
 
-Generate an ``html`` coverage report and open it:
+Generate an ``html`` coverage report:
 
 .. code-block:: bash
 
     $ make coverage
 
-Generate `Sphinx`_ ``html`` documentation and open it:
+Generate `Sphinx`_ ``html`` documentation:
 
 .. code-block:: bash
 
