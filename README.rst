@@ -48,7 +48,7 @@ Contributions in the form of issues or PRs are more than welcome!
 Requirements
 ------------
 
-To run "Mapfix" on Windows, OSX or Linux, you only need `Kivy`_.
+To run Mapfix on Windows, OSX or Linux, you need the following python packages: `kivy`, `click`, `piexif`, `pillow`, `unidecode`, `exifread`, `numpy`, `pyproj` and `plyer`. These will automatically be installed when you setup Mapfix.
 
 Depending on the features that you want to use, you do require additional libs though.
 
@@ -127,7 +127,7 @@ Deploy the app to your android device with `Buildozer`_:
 License
 -------
 
-Distributed under the terms of the `MIT license`_, "Mapfix" is free and open source software
+Distributed under the terms of the `MIT license`_, Mapfix is free and open source software
 
 
 Issues
