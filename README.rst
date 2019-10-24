@@ -1,4 +1,4 @@
-.. image:: data/images/logo_mapfix.png
+.. image:: data/images/presplash_b.png
   :align: center
 
 Mapfix
