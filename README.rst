@@ -20,15 +20,10 @@ Add markers by double tap. A minimum of two markers is required. The more you ad
 
     * - .. figure:: data/images/Screenshot_03.png
 
-           Live Location on photographed map
-
       - .. figure:: data/images//Screenshot_02.png
-
-           Edit calibration marker
 
       - .. figure:: data/images/Screenshot_06.png
 
-           Store several maps and import from camera
 
 
 Features
