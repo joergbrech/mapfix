@@ -12,7 +12,7 @@ MapFix
 .. image:: https://codecov.io/gh/joergbrech/mapfix/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/joergbrech/mapfix
     
-MapFix lets you take photographs of maps and place markers on the image, whenever you know where you are. These markers are used to callibrate the image, so your current location based on your mobile phone's GPS device is dispayed in the image.
+MapFix lets you take photographs of maps and place markers on the image, whenever you know where you are. These markers are used to calibrate the image, so your current location based on your mobile phone's GPS device is dispayed in the image.
 
 Add markers by double tap. A minimum of two markers is required. The more you add, the better the calibration will be.
 
