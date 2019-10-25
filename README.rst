@@ -1,7 +1,7 @@
 .. image:: data/images/presplash_b.png
   :align: center
 
-Mapfix
+MapFix
 ==========================
 
 .. image:: https://readthedocs.org/projects/mapfix/badge/?version=latest
@@ -30,7 +30,7 @@ Features
 --------
 
 * Corrects for orientation, scale and perspective
-* Many different map projectionss
+* Many different map projections
 * Modify/Add/Delete calibration markers
 * Recalibrate manually
 * Lock a calibrated map
@@ -48,7 +48,7 @@ Contributions in the form of issues or PRs are more than welcome!
 Requirements
 ------------
 
-To run Mapfix on Windows, OSX or Linux, you need the following python packages: `kivy`, `click`, `piexif`, `pillow`, `unidecode`, `exifread`, `numpy`, `pyproj` and `plyer`. These will automatically be installed when you setup Mapfix.
+To run MapFix on Windows, OSX or Linux, you need the following python packages: `kivy`, `click`, `piexif`, `pillow`, `unidecode`, `exifread`, `numpy`, `pyproj` and `plyer`. These will automatically be installed when you setup MapFix.
 
 Depending on the features that you want to use, you do require additional libs though.
 
@@ -127,7 +127,7 @@ Deploy the app to your android device with `Buildozer`_:
 License
 -------
 
-Distributed under the terms of the `MIT license`_, Mapfix is free and open source software
+Distributed under the terms of the `MIT license`_, MapFix is free and open source software
 
 
 Issues
