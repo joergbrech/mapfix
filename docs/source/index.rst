@@ -18,6 +18,7 @@ Basics
    :maxdepth: 2
 
    readme
+   disclaimer
 
 
 .. _apiref:
