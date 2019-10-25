@@ -1,4 +1,4 @@
-.. image:: data/images/presplash_b.png
+.. image:: images/presplash_b.png
   :align: center
 
 MapFix
@@ -18,11 +18,11 @@ Add markers by double tap. A minimum of two markers is required. The more you ad
 
 .. list-table:: 
 
-    * - .. figure:: data/images/Screenshot_03.png
+    * - .. figure:: images/Screenshot_03.png
 
-      - .. figure:: data/images//Screenshot_02.png
+      - .. figure:: images//Screenshot_02.png
 
-      - .. figure:: data/images/Screenshot_06.png
+      - .. figure:: images/Screenshot_06.png
 
 
 

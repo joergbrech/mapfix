@@ -27,7 +27,6 @@ source.exclude_dirs = tests, bin
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
-source.exclue_patterns = data/images/Screenshot_*, data/images/presplash_b.png
 
 # (str) Application versioning (method 1)
 # version = 0.1.1

@@ -52,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Mapfix'
+project = u'MapFix'
 copyright = u'2019, Jan Kleinert'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -249,7 +249,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'cookiecutterapp_title', u'Mapfix Documentation',
+  ('index', 'cookiecutterapp_title', u'MapFix Documentation',
    u'Jan Kleinert', 'cookiecutterapp_title', 'One line description of project.',
    'Miscellaneous'),
 ]
