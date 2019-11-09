@@ -37,7 +37,7 @@ version.filename = %(source.dir)s/__init__.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,piexif,pillow,unidecode,exifread,numpy,pyproj==1.9.6,plyer
+requirements = python3,kivy,piexif,pillow,unidecode,exifread,numpy,pyproj,plyer
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -86,13 +86,13 @@ android.minapi = 26
 # android.sdk = 24
 
 # (str) Android NDK version to use
-# android.ndk = 10.3.2
+android.ndk = 20b
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-# android.ndk_path = /home/jan/tools/crystax/crystax-ndk-10.3.2/
+# android.ndk_path = $HOME/.buildozer/android/platform/android-ndk-r20b
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
@@ -101,7 +101,7 @@ android.minapi = 26
 #android.ant_path =
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
-#android.p4a_dir =
+p4a.source_dir = ../python-for-android
 
 # (list) python-for-android whitelist
 #android.p4a_whitelist =
