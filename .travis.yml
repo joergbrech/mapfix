@@ -1,65 +1,74 @@
 language: python
 python:
-- '3.4'
-- '3.5'
-- '3.6'
-- '3.7'
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
 compiler:
-- gcc
+  - gcc
+  
 stages:
 - test
 - name: build-apks
+  
 cache:
-  directories:
-  - ".buildozer"
-  - "$HOME/.buildozer/"
+    directories:
+     - .buildozer
+     - $HOME/.buildozer/
+
 before_install:
-- sudo apt-get update
-- sudo apt-get install -y libgl1-mesa-dev
-
+  - sudo apt-get update
+  - sudo apt-get install -y libgl1-mesa-dev # needed by kivy
+  
 install:
-- pip install -r requirements.txt
-- pip install coverage codecov
-- pip install -e .
-
+  - pip install -r requirements.txt
+  - pip install coverage codecov
+  - pip install -e .
+  
 script:
-- make test
+  - make test
 
 jobs:
   include:
-  - stage: test
-    name: coverage with codecov
-    if: branch = master AND type != pull_request
-    python: '3.7'
-    install:
-    - pip install -r requirements.txt
-    - pip install coverage codecov
-    - pip install -e .
-    script:
-    - make coverage
-    after_success: codecov
-  - stage: build-apk
-    name: debug
-    python: '3.7'
-    before_install:
-    - source ci/before_install.sh
-    before_script:
-    - PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//')
-    - JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-    script:
-    - travis_wait 60 make apk-debug
-  - stage: build-apk
-    name: release
-    python: '3.7'
-    before_install:
-    - source ci/before_install.sh
-    - openssl aes-256-cbc -K $encrypted_000cb8459a15_key -iv $encrypted_000cb8459a15_iv
-  -in mapfix-release-key.keystore.enc -out mapfix-release-key.keystore -d
-    before_script:
-    - PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//')
-    - JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-    script:
-    - travis_wait 60 make apk-release
-    - version=`grep "__version__ = " mapfix/__init__.py | cut -d"'" -f2`
-    - "~/.buildozer/android/platform/android-sdk/build-tools/29.0.2/zipalign -v 4
-      bin/MapFix-${version}-release.apk bin/MapFix-${version}-release-optimized.apk"
+    - stage: test
+      name: coverage with codecov
+      if: branch = master AND type != pull_request
+      python: "3.7"
+      install: 
+        - pip install -r requirements.txt
+        - pip install coverage codecov
+        - pip install -e .
+      script: 
+        - make coverage
+      after_success: codecov
+    - stage: build-apk
+      name: debug
+      python: "3.7"
+      before_install:
+        - source ci/before_install.sh
+      before_script:
+      # workaround to enforce openjdk8 on xenial
+      # from https://travis-ci.community/t/oracle-jdk-11-and-10-are-pre-installed-not-the-openjdk-builds/785/3
+        - PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//')
+        - JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+      script: 
+        - travis_wait 60 make apk-debug
+      #TODO: upload to Github Releases if tag is present.
+    - stage: build-apk
+      name: release
+      python: "3.7"
+      before_install:
+        - source ci/before_install.sh
+        - openssl aes-256-cbc -K $encrypted_000cb8459a15_key -iv $encrypted_000cb8459a15_iv    
+          -in mapfix-release-key.keystore.enc -out mapfix-release-key.keystore -d
+      before_script:
+      # workaround to enforce openjdk8 on xenial
+      # from https://travis-ci.community/t/oracle-jdk-11-and-10-are-pre-installed-not-the-openjdk-builds/785/3
+        - PATH=$(echo "$PATH" | sed -e 's/:\/usr\/local\/lib\/jvm\/openjdk11\/bin//')
+        - JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+      script: 
+        - travis_wait 60 make apk-release
+        # zipalign
+        - version=`grep "__version__ = " mapfix/__init__.py | cut -d"'" -f2`
+        - ~/.buildozer/android/platform/android-sdk/build-tools/29.0.2/zipalign -v 4 bin/MapFix-${version}-release.apk bin/MapFix-${version}-release-optimized.apk
+      #TODO: Sign and upload to Github Releases if tag is present. Maybe even to Play Store
