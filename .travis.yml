@@ -72,4 +72,3 @@ jobs:
         - version=`grep "__version__ = " mapfix/__init__.py | cut -d"'" -f2`
         - ~/.buildozer/android/platform/android-sdk/build-tools/29.0.2/zipalign -v 4 bin/MapFix-${version}-release.apk bin/MapFix-${version}-release-optimized.apk
       #TODO: Sign and upload to Github Releases if tag is present. Maybe even to Play Store
-
