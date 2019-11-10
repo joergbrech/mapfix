@@ -58,9 +58,9 @@ jobs:
       name: release
       python: "3.7"
       before_install:
+        - openssl aes-256-cbc -K $encrypted_000cb8459a15_key -iv $encrypted_000cb8459a15_iv
+            -in ci/mapfix-release-key.keystore.enc -out ci/mapfix-release-key.keystore -d
         - source ci/before_install.sh
-        - openssl aes-256-cbc -K $encrypted_000cb8459a15_key -iv $encrypted_000cb8459a15_iv    
-          -in mapfix-release-key.keystore.enc -out mapfix-release-key.keystore -d
       before_script:
       # workaround to enforce openjdk8 on xenial
       # from https://travis-ci.community/t/oracle-jdk-11-and-10-are-pre-installed-not-the-openjdk-builds/785/3
@@ -72,3 +72,4 @@ jobs:
         - version=`grep "__version__ = " mapfix/__init__.py | cut -d"'" -f2`
         - ~/.buildozer/android/platform/android-sdk/build-tools/29.0.2/zipalign -v 4 bin/MapFix-${version}-release.apk bin/MapFix-${version}-release-optimized.apk
       #TODO: Sign and upload to Github Releases if tag is present. Maybe even to Play Store
+
