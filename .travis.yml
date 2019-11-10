@@ -25,6 +25,7 @@ before_install:
   - pip install --upgrade cython virtualenv
   - pip install --upgrade buildozer
   - PATH=$PATH:~/.local/bin/
+  - git clone -b fix-pyproj-url https://github.com/joergbrech/python-for-android.git $HOME/python-for-android # temporarily use my branch of p4a with fixed url. PR in progress
   
 install:
   - pip install -r requirements.txt
