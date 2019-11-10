@@ -115,7 +115,11 @@ Build an android apk with `Buildozer`_:
 
 .. code-block:: bash
 
-    $ make apk
+    $ make apk-debug
+
+.. code-block:: bash
+
+    $ make apk-release
 
 Deploy the app to your android device with `Buildozer`_:
 

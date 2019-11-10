@@ -18,8 +18,11 @@ docs:
 	$(MAKE) -C docs html
 	#xdg-open docs/build/html/index.html
 
-apk:
+apk-debug:
 	buildozer android debug
+
+apk-release:
+	buildozer android release
 
 deploy:
 	buildozer android deploy logcat
