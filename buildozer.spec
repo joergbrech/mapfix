@@ -47,10 +47,10 @@ requirements = python3,kivy,piexif,pillow,unidecode,exifread,numpy,pyproj,plyer
 #garden_requirements =
 
 # (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/images/presplash.png
+presplash.filename = data/images/presplash.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/images/logo_mapfix.png
+icon.filename = data/images/logo_mapfix.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait
