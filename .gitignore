@@ -13,3 +13,4 @@ htmlcov
 *.pyc
 .vscode
 _build
+bin
