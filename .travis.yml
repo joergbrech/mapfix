@@ -50,8 +50,8 @@ jobs:
         - pip install --upgrade cython virtualenv
         - pip install --upgrade buildozer
         - PATH=$PATH:~/.local/bin/
-      # temporarily use my branch of p4a with fixed url. PR in progress
-        - git clone -b fix-pyproj-url https://github.com/joergbrech/python-for-android.git /home/travis/build/joergbrech/python-for-android
+      # temporarily use my branch of p4a with fixed url and archdir workaround, see comment in issue #3
+        - git clone -b per-arch-builddir-workaround https://github.com/joergbrech/python-for-android.git /home/travis/build/joergbrech/python-for-android
       before_script:
       # workaround to enforce openjdk8 on xenial
       # from https://travis-ci.community/t/oracle-jdk-11-and-10-are-pre-installed-not-the-openjdk-builds/785/3
