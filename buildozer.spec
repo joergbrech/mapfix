@@ -86,7 +86,7 @@ android.minapi = 26
 # android.sdk = 24
 
 # (str) Android NDK version to use
-android.ndk = 20b
+android.ndk = 19c
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
@@ -102,6 +102,8 @@ android.ndk = 20b
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 p4a.source_dir = ../python-for-android
+
+p4a.local_recipes = custom_p4a_recipes
 
 # (list) python-for-android whitelist
 #android.p4a_whitelist =
